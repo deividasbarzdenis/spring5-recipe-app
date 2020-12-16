@@ -2,10 +2,14 @@ package com.debarz.spring5recipeapp.coventers;
 
 import com.debarz.spring5recipeapp.commands.IngredientCommand;
 import com.debarz.spring5recipeapp.domain.Ingredient;
+import com.debarz.spring5recipeapp.domain.Recipe;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Component;
 
+/**
+ * Created by jt on 6/21/17.
+ */
 @Component
 public class IngredientCommandToIngredient implements Converter<IngredientCommand, Ingredient> {
 
@@ -18,14 +22,23 @@ public class IngredientCommandToIngredient implements Converter<IngredientComman
     @Nullable
     @Override
     public Ingredient convert(IngredientCommand source) {
-        if (source == null){
+        if (source == null) {
             return null;
         }
+
         final Ingredient ingredient = new Ingredient();
         ingredient.setId(source.getId());
+
+        if(source.getRecipeId() != null){
+            Recipe recipe = new Recipe();
+            recipe.setId(source.getRecipeId());
+            ingredient.setRecipe(recipe);
+            recipe.addIngredient(ingredient);
+        }
+
         ingredient.setAmount(source.getAmount());
         ingredient.setDescription(source.getDescription());
-        ingredient.setUom(uomConverter.convert(source.getUnitOfMeasure()));
+        ingredient.setUom(uomConverter.convert(source.getUom()));
         return ingredient;
     }
 }
