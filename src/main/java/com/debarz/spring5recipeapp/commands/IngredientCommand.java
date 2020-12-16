@@ -9,7 +9,7 @@ import java.math.BigDecimal;
 @Setter
 @Getter
 @NoArgsConstructor
-public class IngridientCommand {
+public class IngredientCommand {
 
     private Long id;
     private String description;

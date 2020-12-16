@@ -1,14 +1,13 @@
 package com.debarz.spring5recipeapp.coventers;
 
-import com.debarz.spring5recipeapp.commands.IngridientCommand;
-import com.debarz.spring5recipeapp.commands.UnitOfMeasureCommand;
+import com.debarz.spring5recipeapp.commands.IngredientCommand;
 import com.debarz.spring5recipeapp.domain.Ingredient;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Component;
 
 @Component
-public class IngredientCommandToIngredient implements Converter<IngridientCommand, Ingredient> {
+public class IngredientCommandToIngredient implements Converter<IngredientCommand, Ingredient> {
 
     private final UnitOfMeasureCommandToUnitOfMeasure uomConverter;
 
@@ -18,7 +17,7 @@ public class IngredientCommandToIngredient implements Converter<IngridientComman
 
     @Nullable
     @Override
-    public Ingredient convert(IngridientCommand source) {
+    public Ingredient convert(IngredientCommand source) {
         if (source == null){
             return null;
         }
